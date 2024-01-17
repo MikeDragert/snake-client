@@ -11,3 +11,8 @@ conn.on("connect", () => {
 conn.on("data", (data) => {
   console.log(data);
 });
+
+// setInterval(() => {
+//   conn.write("Move: up");
+// }, 50);
+
