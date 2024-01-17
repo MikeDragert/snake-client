@@ -1,4 +1,6 @@
-let connection = undefined;
+const constants = require("./constants");
+
+let connection;
 
 const setupInput = function(_connection) {
   connection = _connection;
@@ -10,40 +12,43 @@ const setupInput = function(_connection) {
   return stdin;
 };
 
+const chooseRandomMessage = function() {  
+  let messageIndex = Math.floor(Math.random()*10);
+  return constants.MESSAGE[messageIndex];
+}
+
+
 const handleUserInput = function(data) {
   switch (data) {
   case '\u0003':
     process.exit();
     break;
-  case 'w':
+  case constants.MOVE_UP_KEY:
     connection.write("Move: up");
     break;
-  case 'a':
+  case constants.MOVE_LEFT_KEY:
     connection.write("Move: left");
     break;
-  case 's':
+  case constants.MOVE_DOWN_KEY:
     connection.write("Move: down");
     break;
-  case 'd':
+  case constants.MOVE_RIGHT_KEY:
     connection.write("Move: right");
     break;
   case '1': 
-    connection.write("Say: It's a trap!");
+  case '2':
+  case '3':
+  case '4':
+  case '5':
+  case '6':
+  case '7':
+  case '8':
+  case '9':
+  case '0':
+    connection.write("Say: " + constants.MESSAGE[(data==0) ? 9 : (data-1)]);
     break;
-  case '2': 
-    connection.write("Say: Hail to the kng bby!");
-    break;
-  case '3': 
-    connection.write("Say: Fried spahgetti!");
-    break;
-  case '4': 
-    connection.write("Say: AHHHHHHHHH!");
-    break;
-  case '5': 
-    connection.write("Say: Do or do not. No try!");
-    break;
-  case '6': 
-    connection.write("Say: Beam me up Scottie!");
+  case ' ':
+    connection.write("Say: "+chooseRandomMessage());
     break;
   default:
     console.log(data);
