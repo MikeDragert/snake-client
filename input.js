@@ -51,7 +51,7 @@ const handleUserInput = function(data) {
     connection.write("Say: "+chooseRandomMessage());
     break;
   default:
-    console.log(data);
+    //console.log(data);
     break;
   }
 };
